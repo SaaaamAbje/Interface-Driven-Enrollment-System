@@ -3,14 +3,14 @@ package org.example;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Tuitionfeepayment {
+public class TuitionFeePayment {
     private String paymentId;
     private String studentId;
     private double amount;
     private LocalDateTime paymentDate;
     private String remarks;
 
-    public Tuitionfeepayment(String paymentId, String studentId, double amount, String remarks) {
+    public TuitionFeePayment (String paymentId, String studentId, double amount, String remarks) {
         this.paymentId = paymentId;
         this.studentId = studentId;
         this.amount = amount;
