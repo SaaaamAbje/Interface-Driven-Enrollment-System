@@ -1,8 +1,9 @@
+package org.example;
+
 import java.util.List;
 
 public class Main {
 
-    // ── Services ─────────────────────────────────────────────────
     static IStudentService    studentService    = new StudentServiceImpl();
     static IInstructorService instructorService = new InstructorServiceImpl();
     static ICourseService     courseService     = new CourseServiceImpl();
@@ -62,32 +63,26 @@ public class Main {
         enrollmentService.viewDepartmentHierarchy(depts.get(idx - 1));
     }
 
-    // ── Sample Data ───────────────────────────────────────────────
     static void loadSampleData() {
         System.out.println("Loading sample data...");
-
-        // Courses
         try {
             courseService.addCourse(new Course("CS101", "Introduction to Programming", 3, 500.00));
             courseService.addCourse(new Course("CS102", "Data Structures", 3, 550.00, "CS101"));
             courseService.addCourse(new Course("CS201", "Object-Oriented Programming", 3, 600.00, "CS101"));
             courseService.addCourse(new Course("MATH101", "Mathematics in the Modern World", 3, 400.00));
-        } catch (DuplicateIdException e) { /* skip on re-seed */ }
+        } catch (DuplicateIdException e) { /* skip */ }
 
-        // Students
         try {
             studentService.addStudent(new Student("S001", "Maria", "Santos", "maria@email.com"));
             studentService.addStudent(new Student("S002", "Juan", "Dela Cruz", "juan@email.com"));
             studentService.addStudent(new Student("S003", "Ana", "Reyes", "ana@email.com"));
         } catch (DuplicateIdException e) { /* skip */ }
 
-        // Instructors
         try {
             instructorService.addInstructor(new Instructor("I001", "Roberto", "Lim", "CCS"));
             instructorService.addInstructor(new Instructor("I002", "Carla", "Bautista", "CCS"));
         } catch (DuplicateIdException e) { /* skip */ }
 
-        // Department and sections
         Department ccs = new Department("DCCS", "College of Computer Studies");
         enrollmentService.addDepartment(ccs);
 
@@ -99,7 +94,6 @@ public class Main {
         instructorService.assignInstructorToSection("I001", sec1A);
         instructorService.assignInstructorToSection("I002", sec1B);
 
-        // Assign tuition to Maria
         Student maria = studentService.findStudentById("S001");
         tuitionService.assignTuitionToStudent(maria,
                 tuitionService.calculateFee(3, 500.00));
